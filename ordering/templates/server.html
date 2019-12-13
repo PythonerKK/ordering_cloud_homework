@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>&nbsp;&nbsp云服务器管理</h2>
+      <div class="row">
+        <div class="col-md-3">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-text">CPU状态({{ cpu_count }}核)</div>
+          </div>
+          <div class="card-body">
+            <h2 class="no-margins" id="cpu">{{ cpu_state }}</h2>
+          </div>
+        </div>
+      </div>
+
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-text">内存状态(已用内存/总内存)</div>
+            </div>
+            <div class="card-body">
+              <h2 class="no-margins" id="mem">{{ memory }}</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-text">启动时间</div>
+            </div>
+            <div class="card-body">
+              <h2 class="no-margins" id="boot">{{ boot_time }}</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-text">服务器操作</div>
+            </div>
+            <div class="card-body">
+              <button class="btn btn-danger">重新启动</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+      <div class="row">
+        <div class="col-md-12">
+        <div class="col-lg-12" id="container" style="height: 400px;border: 1px solid #e6e6e6;padding-top: 20px;">
+            CPU使用率
+        </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+
+  <script src="{% static 'js/server.js' %}"></script>
+  <script src="{% static 'js/highcharts.js' %}"></script>
+
+{% endblock %}
+
+

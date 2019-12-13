@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}会员管理 - {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+              <h2>共有{{ count | add:-1 }}个会员</h2>
+                <table class="table table-bordered m-t">
+                  <thead>
+                    <tr>
+                      <th scope="col">头像</th>
+                      <th scope="col">昵称或用户名</th>
+                      <th scope="col">手机号</th>
+                      <th scope="col">性别</th>
+                      <th scope="col">地区</th>
+                      <th scope="col">加入时间</th>
+                      <th scope="col">权限</th>
+                      <th scope="col">操作</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+
+
+            {% for user in users %}
+                <tr>
+                    <td scope="row"><img style="width: 32px; height: 32px" src="{% if user.avatar_url %}{{ user.avatar_url }}{% else %}{% static "images/avatar.png" %}{% endif %}" alt=""></td>
+                    <td>{{ user.get_profile_name }}</td>
+                    <td>{% if user.mobile %}{{user.mobile}}{% else %}暂无{% endif %}</td>
+                    <td>{{ user.get_gender_display }}</td>
+                    <td>{% if user.address %}{{ user.address }}{% else %}无{% endif %}</td>
+                    <td>{{ user.date_joined }}</td>
+                    <td>{% if user.is_superuser %}超级管理员{% else %}普通用户{% endif %}</td>
+                    <td><a class="m-l" href="{% url 'management:user-info' user.pk %}">
+                        <i class="fa fa-eye fa-lg"></i>
+                    </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <h4 class="no-data">还没有记录</h4>
+            {% endfor %}
+                  </tbody>
+                </table>
+
+            <br>
+
+            {% include 'pagination.html' %}
+
+        </div>
+
+    </div>
+
+
+
+{% endblock content %}

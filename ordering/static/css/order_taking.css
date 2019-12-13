@@ -1,0 +1,25 @@
+.single-item {
+  margin-top: 2px;
+  background-color: blue;
+}
+
+.order-code {
+  font-weight: bold; font-size: 40px;
+}
+
+
+.order-info {
+  margin-left: 20px;
+  font-weight: normal
+}
+
+
+.money {
+  color: green
+}
+
+.single-cake {
+
+  color: blue;
+  font-size: 15px;
+}
