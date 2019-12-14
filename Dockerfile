@@ -1,11 +1,12 @@
 FROM python:3.7
-
+MAINTAINER liyuankun 705555262@qq.com
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /code
+RUN mkdir /ordering
+WORKDIR /ordering
 
-COPY ./requirements.txt /code/requirements.txt
-RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
+ADD . /ordering/
+RUN pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 
-COPY . /code/
+ENV SPIDER=/ordering

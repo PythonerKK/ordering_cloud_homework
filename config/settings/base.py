@@ -36,7 +36,7 @@ USE_TZ = False
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-# DATABASES = {"default": env.db("DATABASE_URL")}
+#DATABASES = {"default": env.db("DATABASE_URL")}
 # DATABASES["default"]["ATOMIC_REQUESTS"] = True
 DATABASES = {
     'default': {
@@ -193,11 +193,11 @@ FIXTURE_DIRS = (str(APPS_DIR.path("fixtures")),)
 # SECURITY
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-httponly
-SESSION_COOKIE_HTTPONLY = True
+#SESSION_COOKIE_HTTPONLY = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-httponly
-CSRF_COOKIE_HTTPONLY = False
+#CSRF_COOKIE_HTTPONLY = False
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-browser-xss-filter
-SECURE_BROWSER_XSS_FILTER = True
+#SECURE_BROWSER_XSS_FILTER = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
 
 X_FRAME_OPTIONS = "DENY"
@@ -260,3 +260,17 @@ EMAIL_PORT = env('DJANGO_EMAIL_PORT', default=465)
 EMAIL_HOST_USER = env('DJANGO_EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('DJANGO_EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL')
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://redis:6379',  # redis（容器）
+        #'LOCATION': '127.0.0.1:6379',
+        'OPTIONS': {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "CONNECTION_POOL_KWARGS": {"max_connections": 100},
+            'SOCKET_TIMEOUT': 10,
+        },
+    },
+}
